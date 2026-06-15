@@ -468,4 +468,3 @@ Tomorrow's lesson moves into **distributions** — the mathematical models that 
 
 ---
 
-*Lesson designed for internal use — Statistical Foundations, Data Science Curriculum*
