@@ -2,7 +2,6 @@
 
 > **Course:** Data Science Foundations
 > **Module:** Statistics & Math for Data Science (1-Week Intensive)
-> **Format:** Full-day sessions, Monday–Saturday
 > **Prerequisites:** Basic Python, NumPy/Pandas familiarity
 
 ---
@@ -52,22 +51,13 @@ Mon: Stats Fundamentals  →  Tue: Distributions  →  Wed: Probability Theory
                                           (linear algebra → calculus → optimization)
 ```
 
-Each day's lesson follows the same structure: **Learning Objectives → Concept Walkthroughs → Hands-On Python → Daily Challenge → Summary → What's Next**, so students always know what to expect and how each piece fits into the bigger picture.
-
+Each day's lesson follows the same structure: **Learning Objectives → Concept Walkthroughs → Hands-On Python → Daily Challenge → Summary → What's Next**.
 ---
 
 ## Daily Workflow
 
-- **Concept sessions** (morning): Theory, worked examples, and intuition-building — each new idea is tied back to something covered earlier in the week.
-- **Hands-on sessions** (afternoon): Python implementation using NumPy, Pandas, SciPy, Matplotlib, and Seaborn on real and simulated datasets.
+- **Concept sessions** : Theory, worked examples, and intuition-building — each new idea is tied back to something covered earlier in the week.
+- **Hands-on sessions** : Python implementation using NumPy, Pandas, SciPy, Matplotlib, and Seaborn on real and simulated datasets.
 - **Daily Challenge**: A short applied exercise submitted to the Kanban board by end of day, designed to reinforce that day's concepts before the next day builds on them.
 
----
-
-## What's Next
-
-Proceed to `1-statistics-fundamentals.md` for Monday's lesson.
-
----
-
-*Module designed for internal use — Data Science Foundations Curriculum*
+--
