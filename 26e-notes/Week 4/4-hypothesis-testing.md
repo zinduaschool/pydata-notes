@@ -115,7 +115,7 @@ The most common choice is **α = 0.05**, meaning you accept a 5% chance of incor
 | p-value ≤ α (e.g. ≤ 0.05) | **Reject H₀** — the result is statistically significant |
 | p-value > α (e.g. > 0.05) | **Fail to reject H₀** — not enough evidence |
 
-> ⚠️ **Common misconception:** A p-value is NOT the probability that H₀ is true. It is the probability of your data (or more extreme data) given that H₀ is true. This is a subtle but important distinction.
+>  **Common misconception:** A p-value is NOT the probability that H₀ is true. It is the probability of your data (or more extreme data) given that H₀ is true. This is a subtle but important distinction.
 
 ### Statistical significance ≠ Practical significance
 
@@ -258,10 +258,10 @@ print(f"P-value: {p_value:.4f}")
 
 ```python
 if p_value <= alpha:
-    print(f"\n✅ Result: Statistically significant (p={p_value:.4f} ≤ α={alpha})")
+    print(f"\n Result: Statistically significant (p={p_value:.4f} ≤ α={alpha})")
     print("Decision: Reject H0 — the new landing page performs differently.")
 else:
-    print(f"\n❌ Result: Not statistically significant (p={p_value:.4f} > α={alpha})")
+    print(f"\n Result: Not statistically significant (p={p_value:.4f} > α={alpha})")
     print("Decision: Fail to reject H0 — no strong evidence of a difference.")
 ```
 
@@ -318,7 +318,7 @@ print(f"\nIf we have 10,000 monthly visitors, the new page would generate")
 print(f"an additional ~{int(absolute_lift * 10000)} sign-ups per month.")
 ```
 
-> 💡 This final step is what turns a statistical result into a **business decision**. A 2 percentage point lift might be worth shipping — or it might not, depending on the cost of the redesign.
+>  This final step is what turns a statistical result into a **business decision**. A 2 percentage point lift might be worth shipping — or it might not, depending on the cost of the redesign.
 
 ---
 
