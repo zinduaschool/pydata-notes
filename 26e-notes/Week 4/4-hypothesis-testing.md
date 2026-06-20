@@ -369,5 +369,4 @@ Descriptive Stats → Distributions → Probability → Hypothesis Testing
 Every tool in data science — from machine learning to dashboards — builds on this foundation.
 
 ---
-
-*Lesson designed for internal use — Statistical Foundations, Data Science Curriculum*
+*Lesson designed by Zindua School Team members, co-authored by Claude and Counterchecked by Zindua School Data Science Team*

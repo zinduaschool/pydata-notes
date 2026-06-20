@@ -1,8 +1,9 @@
 # Distributions
 
-> **Course:** Data Science Foundations
-> **Lesson:** Day 2 — Distributions
-> **Prerequisites:** Statistics Fundamentals
+> **Course:** Data Analytics
+> **Lesson:** Data Distributions
+> **Prerequisites:** Statistical Foundations (mean, std, variance)
+
 
 ---
 
@@ -77,7 +78,7 @@ You don't need to solve this integral by hand — `scipy.stats` will do it for y
 | **Typical question** | "What's the probability of exactly k?" | "What's the probability between a and b?" |
 | **Examples in this lesson** | Poisson | Uniform, Normal |
 
-> 💡 Note that the **Uniform distribution** can technically exist in both discrete form (e.g. a fair die: 1–6) and continuous form (e.g. a random number between 0 and 1). We'll focus on the continuous case below, since it's the more common one in data analysis.
+>  Note that the **Uniform distribution** can technically exist in both discrete form (e.g. a fair die: 1–6) and continuous form (e.g. a random number between 0 and 1). We'll focus on the continuous case below, since it's the more common one in data analysis.
 
 ---
 
@@ -165,7 +166,7 @@ It is defined by exactly two parameters:
 
 A normal distribution is **symmetric** around its mean, **bell-shaped**, with a single peak at the centre (unimodal), and tails that taper off smoothly and never quite reach zero. Visually: if you fold the histogram in half at the centre, the two sides should roughly mirror each other. If one side has a noticeably longer tail than the other, the data is skewed rather than normal (recall skewness from Monday's lesson).
 
-> ⚠️ A histogram that *looks* roughly bell-shaped isn't proof of normality on its own — later in the course you'll meet formal tools like the QQ plot and statistical normality tests. For now, visual inspection combined with the empirical rule below is enough.
+>  A histogram that *looks* roughly bell-shaped isn't proof of normality on its own — later in the course you'll meet formal tools like the QQ plot and statistical normality tests. For now, visual inspection combined with the empirical rule below is enough.
 
 ### 5.4 The 68-95-99.7 Rule (Empirical Rule)
 
@@ -379,6 +380,4 @@ plt.show()
 
 Tomorrow's lesson moves into **Probability Theory** — formalising exactly how to calculate the probabilities these distributions describe, including joint and conditional probability, and Bayes' theorem for updating beliefs as new evidence arrives. You'll see the Uniform, Poisson, and Normal distributions again, this time as tools for answering precise probability questions.
 
----
-
-*Lesson designed for internal use — Statistical Foundations, Data Science Curriculum*
+*Lesson designed by Zindua School Team members, co-authored by Claude and Counterchecked by Zindua School Data Science Team*

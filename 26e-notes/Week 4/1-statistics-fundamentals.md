@@ -1,10 +1,9 @@
 # Statistics Fundamentals
 
-> **Course:** Data Science Foundations
+> **Course:** Data Analytics
 > **Lesson:** Day 1 — Statistics Fundamentals
 > **Prerequisites:** Basic Python, NumPy/Pandas familiarity
 
----
 
 ## Learning Objectives
 
@@ -17,7 +16,6 @@ By the end of this lesson, you will be able to:
 - Understand what **inferential statistics** is, how it differs from description, and why it matters
 - Apply all of the above in Python on a real dataset
 
----
 
 ## 1. Measures of Central Tendency
 
@@ -62,9 +60,8 @@ Scores: `[55, 60, 60, 70, 80, 80, 80, 85]` → Mode = **80**
 | Skewed data or outliers present | Median |
 | Categorical data, or finding the most common value | Mode |
 
-> 💡 A useful habit: compute **all three**. If the mean and median are close together, your data is roughly symmetric. If they diverge significantly, that's your first clue that the data is skewed — and you'll formalise exactly what "skewed" means in Section 4.
+>  A useful habit: compute **all three**. If the mean and median are close together, your data is roughly symmetric. If they diverge significantly, that's your first clue that the data is skewed — and you'll formalise exactly what "skewed" means in Section 4.
 
----
 
 ## 2. Measures of Spread
 
@@ -103,7 +100,7 @@ From the example above: Standard Deviation = √66.7 ≈ **8.16**
 
 This means most scores sit roughly **8 marks away from the mean** — far more interpretable than "66.7 squared marks."
 
-> 💡 **Population vs. Sample:** When your data represents the *entire* population, divide by `n` (this is what the formulas above show). When your data is a *sample* drawn from a larger population — which is the far more common case in practice — divide by `n − 1` instead. This is called **Bessel's correction**, and it corrects for the fact that a sample tends to slightly underestimate the true population variance. Pandas uses `n − 1` by default; NumPy uses `n` by default.
+>  **Population vs. Sample:** When your data represents the *entire* population, divide by `n` (this is what the formulas above show). When your data is a *sample* drawn from a larger population — which is the far more common case in practice — divide by `n − 1` instead. This is called **Bessel's correction**, and it corrects for the fact that a sample tends to slightly underestimate the true population variance. Pandas uses `n − 1` by default; NumPy uses `n` by default.
 
 ### 2.4 Interquartile Range (IQR) and the Five-Number Summary
 
@@ -131,7 +128,6 @@ $$CV = \frac{\sigma}{\bar{x}}$$
 
 Often expressed as a percentage. A CV of 10% means the standard deviation is 10% of the mean — useful for comparing relative variability between datasets with very different units or magnitudes.
 
----
 
 ## 3. Relationships Between Variables
 
@@ -181,7 +177,6 @@ Because it's unitless and bounded, correlation is what you'll use almost everywh
 
 A strong correlation tells you two variables move together — it does **not** tell you why. Classic examples: ice cream sales and drowning incidents are strongly correlated (both rise in summer), but ice cream doesn't cause drowning. A third variable — temperature — drives both. This is called a **confounding variable**, and it's one of the most important caveats in all of data analysis. Always ask: *"Could something else be driving both of these?"* before concluding one variable affects the other.
 
----
 
 ## 4. Descriptive Statistics — Putting It All Together
 
@@ -216,7 +211,6 @@ Numbers alone only tell part of the story — visualisations make patterns immed
 
 You'll build both in the hands-on section below.
 
----
 
 ## 5. Inferential Statistics — A First Look
 
@@ -249,7 +243,7 @@ Inferential statistics rests on two ideas you'll build over the next few days:
 
 A quick preview of the core idea: if you repeatedly drew different samples from the same population and computed the mean of each sample, those sample means would themselves form a distribution — called the **sampling distribution of the mean**. This distribution tends toward a normal shape even when the underlying population isn't normal (a result called the **Central Limit Theorem**), and it's the foundation on which confidence intervals and hypothesis tests are built. You'll see this in action in the hands-on section below — and revisit it formally later in the week.
 
----
+
 
 ## 6. Hands-On: Python
 
@@ -273,7 +267,6 @@ df = pd.DataFrame(iris.data, columns=iris.feature_names)
 df.head()
 ```
 
----
 
 ### 6.2 Measures of Central Tendency
 
@@ -290,7 +283,6 @@ print("Sepal length — Median:", sepal_length.median())
 print("Sepal length — Mode:", sepal_length.mode()[0])
 ```
 
----
 
 ### 6.3 Measures of Spread
 
@@ -327,7 +319,6 @@ cv = sepal_length.std() / sepal_length.mean()
 print(f"\nCoefficient of Variation: {cv:.2%}")
 ```
 
----
 
 ### 6.4 Relationships: Covariance and Correlation
 
@@ -357,7 +348,6 @@ plt.title(f"Sepal Length vs Petal Length (r = {corr_value:.2f})")
 plt.show()
 ```
 
----
 
 ### 6.5 Descriptive Statistics: Shape and Visualisation
 
@@ -381,7 +371,6 @@ plt.show()
 
 > **Interpret what you see:** Does the histogram look symmetric, skewed, or does it show more than one cluster? Does the box plot flag any outliers? What does the skewness value confirm about the shape?
 
----
 
 ### 6.6 A Taste of Inference: Simulating the Sampling Distribution
 
@@ -422,9 +411,8 @@ print(f"Standard deviation of individual values: {population.std():.3f}")
 print(f"Standard deviation of sample means:      {sample_means.std():.3f}")
 ```
 
-> 💡 Notice two things: the sampling distribution of the mean is *narrower* than the original distribution (sample means are less variable than individual values), and it looks more bell-shaped — even though the original petal length data may not be perfectly normal. This is the Central Limit Theorem at work, and it's the reason confidence intervals and hypothesis tests (later this week) are even possible.
+>  Notice two things: the sampling distribution of the mean is *narrower* than the original distribution (sample means are less variable than individual values), and it looks more bell-shaped — even though the original petal length data may not be perfectly normal. This is the Central Limit Theorem at work, and it's the reason confidence intervals and hypothesis tests (later this week) are even possible.
 
----
 
 ## Daily Challenge
 
@@ -438,8 +426,6 @@ Using the Iris dataset (or a dataset of your choice):
 6. Write 3–4 sentences summarising your findings as if explaining them to a non-technical colleague — make sure to distinguish what your sample shows from what you could (and couldn't yet) claim about the broader population.
 
 > Submit your notebook to the Kanban board under your name by end of day.
-
----
 
 ## Summary
 
@@ -460,11 +446,10 @@ Using the Iris dataset (or a dataset of your choice):
 | Population vs. Sample | What you want to know vs. what you can measure | — |
 | Sampling Distribution | The distribution of a statistic across repeated samples | Simulation |
 
----
+
 
 ## What's Next
 
 Tomorrow's lesson moves into **distributions** — the mathematical models that describe how data values are spread, including the Uniform, Poisson, and Normal distributions. These distributions are what make the sampling distribution from Section 6.6 behave the way it does, and they form the foundation for everything in Wednesday's probability lesson and Thursday's hypothesis testing.
 
----
-
+*Lesson designed by Zindua School Team members, co-authored by Claude and Counterchecked by Zindua School Data Science Team*

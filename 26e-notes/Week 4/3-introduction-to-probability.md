@@ -109,7 +109,7 @@ $$P(A \cap B) = P(A) \times P(B)$$
 > **Example:** The probability of rolling a 6 on a die AND flipping heads on a coin:
 > P(6) × P(Heads) = (1/6) × (1/2) = **1/12 ≈ 0.083**
 
-> ⚠️ **Important:** This formula only works if the events are truly independent. Exam attendance and passing are NOT independent — that's the whole point of the next section.
+>  **Important:** This formula only works if the events are truly independent. Exam attendance and passing are NOT independent — that's the whole point of the next section.
 
 ---
 
@@ -284,7 +284,7 @@ print(f"P(Positive): {p_positive:.4f}")
 print(f"P(Disease | Positive test): {p_disease_given_positive:.4f} ({p_disease_given_positive*100:.1f}%)")
 ```
 
-> 💡 Try changing `p_disease` to 0.10 (10% prevalence) and observe how dramatically the result changes. This is why screening programs depend heavily on population prevalence.
+> Try changing `p_disease` to 0.10 (10% prevalence) and observe how dramatically the result changes. This is why screening programs depend heavily on population prevalence.
 
 ---
 
@@ -381,8 +381,5 @@ plt.show()
 
 ## What's Next
 
-In the next lesson we move into **hypothesis testing** — using probability to make decisions from data. You'll learn how to determine whether a difference you observe is real or just due to chance.
+Tomorrow's lesson moves into **Hypothesis Testing** — using everything you've learned this week (distributions, probability, and the sampling distribution from Monday) to make formal decisions from data. You'll learn how to think about Type I and Type II errors, statistical significance, and how to determine whether a difference you observe is real or just due to chance.
 
----
-
-*Lesson designed for internal use — Statistical Foundations, Data Science Curriculum*
