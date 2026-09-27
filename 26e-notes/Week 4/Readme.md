@@ -59,5 +59,19 @@ Each day's lesson follows the same structure: **Learning Objectives → Concept 
 - **Concept sessions** : Theory, worked examples, and intuition-building — each new idea is tied back to something covered earlier in the week.
 - **Hands-on sessions** : Python implementation using NumPy, Pandas, SciPy, Matplotlib, and Seaborn on real and simulated datasets.
 - **Daily Challenge**: A short applied exercise submitted to the Kanban board by end of day, designed to reinforce that day's concepts before the next day builds on them.
+- **Lab**: A guided notebook in `labs/` with `# TODO` cells, self-check cells, and written questions. Each lab uses a different dataset from the lesson, so learners adapt the ideas rather than copy code.
+
+## Labs
+
+| Day | Lab notebook | Dataset | Extends the lesson with |
+|---|---|---|---|
+| Mon | `labs/1-statistics-fundamentals-lab.ipynb` | `mpg` | Stats from scratch, missing-value handling, Spearman correlation, standard error $\sigma/\sqrt{n}$ |
+| Tue | `labs/2-distributions-lab.ipynb` | `taxis` | Mystery distributions, Bernoulli/Binomial, z-scores, QQ plots, overdispersion in real counts |
+| Wed | `labs/3-probability-theory-lab.ipynb` | `titanic` + dice | Complement/addition rules, Bayes on real data, sequential updating, Monte Carlo checks, likelihood/MLE |
+| Thu | `labs/4-hypothesis-testing-lab.ipynb` | `penguins` | One-sample t-test by hand, confidence intervals, Welch's test, Cohen's d, ANOVA, permutation test, multiple testing, sample-size planning |
+| Fri | `labs/5-linear-algebra-lab.ipynb` | `mpg` | Loop-based matrix multiplication, inverse and singular matrices, cosine similarity, split-then-scale, collinearity |
+| Sat | `labs/6-calculus-lab.ipynb` | `mpg` | Finite-difference error, exp/log/sigmoid derivatives, gradient checking, learning-rate limits, local minima, mini-batch SGD |
+
+Worked solutions and model answers are in `labs/solutions/`. Attempt each lab on your own first, then use the solutions to check your work or to get unstuck. Labs need `numpy`, `pandas`, `scipy`, `matplotlib`, `seaborn`, and `scikit-learn` (Fri/Sat), plus internet access the first time `sns.load_dataset` runs.
 
 --

@@ -137,7 +137,7 @@ $$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$$
 
 This is a $3 \times 3$ matrix (3 rows, 3 columns). The convention is **rows by columns**, always in that order.
 
-In code, an entire dataset with $m$ samples and $n$ features is stored as an $m \times n$ matrix. The Iris dataset you used earlier this week is a $150 \times 4$ matrix; the California Housing dataset you will use today is a $20640 \times 8$ matrix.
+In code, an entire dataset with $m$ samples and $n$ features is stored as an $m \times n$ matrix. The Penguins dataset from Monday, with its 4 numeric measurements and 333 complete rows, is a $333 \times 4$ matrix; the California Housing dataset you will use today is a $20640 \times 8$ matrix.
 
 ### 3.2 Notation and Element Access
 
@@ -318,7 +318,7 @@ The closed form requires inverting $X^T X$, which is an $(n+1) \times (n+1)$ mat
 
 ## 6. Hands-On: Linear Algebra with the California Housing Dataset
 
-We will work with the **California Housing dataset**, which contains 20,640 housing records from the 1990 California census with 8 numeric features. This is genuinely large compared to Iris (150 rows) and gives the matrix operations real substance.
+We will work with the **California Housing dataset**, which contains 20,640 housing records from the 1990 California census with 8 numeric features. This is genuinely large compared to Penguins (333 complete rows) and gives the matrix operations real substance.
 
 ### 6.1 Setup and Loading
 
@@ -385,16 +385,26 @@ plt.show()
 
 **Dot product as similarity between samples.**
 
-```python
-# Compare the first sample to all others using the dot product
-first_sample = X_matrix[0]
-similarities = X_matrix @ first_sample   # Matrix-vector multiplication, 20640 dot products
+The raw dot product is a poor similarity measure on unscaled data: it rewards rows with *large* values, so `Population` (in the thousands) would decide the ranking on its own. Two fixes make it meaningful. First, **standardise** each feature (subtract its mean, divide by its standard deviation) so every feature is on the same scale. Second, divide by the two vector lengths to get the **cosine similarity** from Section 2.5, which keeps only the direction:
 
-# Which 5 samples are most similar (largest dot product)?
-top_indices = np.argsort(similarities)[-5:][::-1]
-print("Top 5 most similar samples to sample 0 (by raw dot product):")
+$$\cos(\theta) = \frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\| \, \|\vec{b}\|}$$
+
+```python
+# Standardise each column (z-scores) so no single feature dominates
+X_std = (X_matrix - X_matrix.mean(axis=0)) / X_matrix.std(axis=0)
+
+# Cosine similarity of the first sample with every sample:
+# one matrix-vector product (20640 dot products), divided by the vector lengths
+first_sample = X_std[0]
+similarities = (X_std @ first_sample) / (np.linalg.norm(X_std, axis=1) * np.linalg.norm(first_sample))
+
+# Which 5 samples are most similar? (skip position 0, which is the sample itself)
+top_indices = np.argsort(similarities)[::-1][1:6]
+print("Top 5 most similar samples to sample 0 (cosine similarity on standardised features):")
 print(X_full.iloc[top_indices])
 ```
+
+> Try replacing `X_std` with the raw `X_matrix` and dropping the division. The "most similar" rows become simply the ones with the largest populations, which shows why scaling matters before comparing vectors.
 
 ### 6.4 Matrix Operations on Real Data
 
@@ -425,18 +435,22 @@ plt.show()
 Now we apply the boxed equation from Section 5.3 directly to predict California house values.
 
 ```python
-# Step 1: Standardise features so they share a comparable scale
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X_matrix)
-
-# Step 2: Train/test split for honest evaluation
+# Step 1: Train/test split for honest evaluation
 X_train, X_test, y_train, y_test = train_test_split(
-    X_scaled, y_full.values, test_size=0.2, random_state=42
+    X_matrix, y_full.values, test_size=0.2, random_state=42
 )
 print(f"Training set: {X_train.shape[0]:,} samples")
 print(f"Test set:     {X_test.shape[0]:,} samples")
+
+# Step 2: Standardise features so they share a comparable scale.
+# Fit the scaler on the TRAINING set only, then apply it to both sets.
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
 ```
+
+> **Why split before scaling?** The scaler learns a mean and standard deviation for each feature. If it is fitted on the full dataset, those numbers include the test rows, so information about the test set leaks into training and the test score becomes slightly optimistic. Always fit preprocessing steps on the training data only.
 
 ```python
 # Step 3: Add a column of 1s for the intercept term w_0
@@ -461,6 +475,8 @@ feature_names = ["Intercept"] + list(X_full.columns)
 for name, weight in zip(feature_names, w):
     print(f"  {name:<12s}: {weight:+.4f}")
 ```
+
+> **A note on the inverse.** The inverse $A^{-1}$ of a square matrix $A$ is the matrix that undoes it: $A A^{-1} = A^{-1} A = I$. It only exists when the columns of $A$ are linearly independent (no column can be built from the others), which is the same as saying the determinant of $A$ is not zero. Writing $(X^T X)^{-1}$ is the clearest way to show the formula, but numerical code avoids computing inverses in practice. `np.linalg.solve(XtX, Xty)` solves $X^T X \vec{w} = X^T \vec{y}$ directly, is faster and more accurate, and gives the same weights here.
 
 ```python
 # Step 5: Make predictions and evaluate
@@ -542,6 +558,8 @@ Verify with `A @ B`. What is the shape of the result, and why?
 4. **Why standardise?** Repeat the California Housing regression *without* the StandardScaler step. Are the predictions different? Are the coefficients still comparable across features? Explain in 2 to 3 sentences.
 
 5. **Bonus: The Gram matrix and the correlation matrix.** Compute the correlation matrix of the *standardised* California Housing features. Then compute $\frac{1}{n} X^T X$ where $X$ is also the standardised matrix. How are these two matrices related? Why?
+
+> Submit your notebook to the Kanban board under your name by end of day.
 
 
 ## Summary

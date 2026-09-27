@@ -176,7 +176,7 @@ Where:
 - $s_A^2$, $s_B^2$ are the group variances (Section 3 of Monday)
 - $n_A$, $n_B$ are the group sample sizes
 
-The numerator is the difference between groups. The denominator is essentially the combined standard error. If the difference is large relative to the noise, the t-statistic is large in absolute value, and the data is hard to explain under H₀.
+The numerator is the difference between groups. The denominator is essentially the combined standard error. This version, which estimates each group's variance separately, is called **Welch's t-test**. It does not assume the two groups have equal variances, which makes it the safer default. In SciPy you get it with `stats.ttest_ind(a, b, equal_var=False)`. Without `equal_var=False`, SciPy runs the older Student's t-test, which pools the two variances and assumes they are equal. If the difference is large relative to the noise, the t-statistic is large in absolute value, and the data is hard to explain under H₀.
 
 ### 5.2 The Sampling Distribution
 
@@ -369,7 +369,8 @@ print(f"Non-smokers (n={len(nonsmoker_tips)}): mean = {nonsmoker_tips.mean():.2f
 
 ```python
 # Two-sample t-test (independent samples)
-t_stat, p_value = stats.ttest_ind(smoker_tips, nonsmoker_tips)
+# Welch's t-test (equal_var=False), matching the formula in Section 5.1
+t_stat, p_value = stats.ttest_ind(smoker_tips, nonsmoker_tips, equal_var=False)
 alpha = 0.05
 
 print(f"\nt-statistic: {t_stat:.4f}")
@@ -408,7 +409,7 @@ dinner_tips = tips[tips['time'] == 'Dinner']['tip_pct']
 print(f"\nLunch (n={len(lunch_tips)}):  mean = {lunch_tips.mean():.2f}%, std = {lunch_tips.std():.2f}")
 print(f"Dinner (n={len(dinner_tips)}): mean = {dinner_tips.mean():.2f}%, std = {dinner_tips.std():.2f}")
 
-t_stat_2, p_value_2 = stats.ttest_ind(lunch_tips, dinner_tips)
+t_stat_2, p_value_2 = stats.ttest_ind(lunch_tips, dinner_tips, equal_var=False)
 print(f"\nt-statistic: {t_stat_2:.4f}")
 print(f"p-value:     {p_value_2:.4f}")
 ```
@@ -434,6 +435,8 @@ if p_value_3 <= 0.05:
 else:
     print("\nResult: Fail to reject H0. No clear association.")
 ```
+
+> **A caution about running several tests.** We have just run three separate tests on the same dataset, each at α = 0.05. Each test on its own has a 5% chance of a false positive, but the chance that *at least one* of the three fires by luck is higher: about 1 − 0.95³ ≈ 14% if all three null hypotheses were true. This is the **multiple testing problem**, and it grows quickly: with 20 tests the chance of at least one false positive is about 64%. The simplest fix is the **Bonferroni correction**: divide α by the number of tests (here, 0.05 / 3 ≈ 0.017) and only call a result significant if its p-value is below that stricter threshold. Better still, decide which question is your primary one *before* looking at the data.
 
 ## 8. Hands-On Part 3: Simulating Type I and Type II Errors Directly
 

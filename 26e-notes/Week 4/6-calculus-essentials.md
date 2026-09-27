@@ -180,7 +180,7 @@ For a function $f(\vec{w})$ that takes a vector of $n$ inputs, the **gradient** 
 
 $$\nabla f(\vec{w}) = \begin{bmatrix} \dfrac{\partial f}{\partial w_1} \\ \dfrac{\partial f}{\partial w_2} \\ \vdots \\ \dfrac{\partial f}{\partial w_n} \end{bmatrix}$$
 
-The symbol $\nabla$ (a triangle pointing down, called "delta" ) simply means "gradient of."
+The symbol $\nabla$ (an upside-down triangle, called "nabla" or "del") simply means "gradient of."
 
 ### 4.2 What the Gradient Tells You Geometrically
 
@@ -311,12 +311,13 @@ data = fetch_california_housing()
 X_full = pd.DataFrame(data.data, columns=data.feature_names)
 y_full = data.target
 
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X_full.values)
-
+# Split first, then fit the scaler on the training set only (same as Day 5)
 X_train, X_test, y_train, y_test = train_test_split(
-    X_scaled, y_full, test_size=0.2, random_state=42
+    X_full.values, y_full, test_size=0.2, random_state=42
 )
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
 
 # Add intercept column (same as Day 5)
 def add_intercept(X):
@@ -487,7 +488,7 @@ comparison = pd.DataFrame({
 print(comparison.round(6))
 ```
 
-The two columns should be nearly identical (typically agreeing to 4 or 5 decimal places). Gradient descent gets to the same answer as the normal equations, just by a different route. This is your evidence that the calculus underneath is sound.
+The two columns should be very close: after 1,000 iterations at this learning rate they typically agree to about two decimal places (the largest difference is around 0.003). Gradient descent is heading for the same answer as the normal equations, just by a different route, and it gets closer with every iteration. Try `n_iters=5000`, or `learning_rate=0.4`, and the differences shrink to essentially zero. This is your evidence that the calculus underneath is sound. It is also a reminder that gradient descent is *approximate*: how close it gets depends on the learning rate and on how many iterations you give it.
 
 ```python
 # Compare predictions on the test set
@@ -505,7 +506,7 @@ To see the practical impact of $\alpha$, let us run gradient descent with three 
 ```python
 lr_too_small = 0.0001
 lr_good = 0.05
-lr_too_large = 0.5
+lr_too_large = 0.55
 
 _, losses_small = linear_regression_gd(X_train_d, y_train,
                                        learning_rate=lr_too_small,
@@ -529,7 +530,9 @@ plt.yscale("log")
 plt.show()
 ```
 
-You should see three distinct behaviours: the small learning rate barely moves, the good one converges quickly, and the large one either oscillates or explodes upward. There is no skipping this step in practice; tuning $\alpha$ is part of the job.
+You should see three distinct behaviours: the small learning rate barely moves, the good one converges quickly, and the large one explodes upward. (NumPy may print overflow warnings for the large run; that is the divergence you are looking for.)
+
+The boundary between converging and diverging is sharper than you might expect. For this dataset, $\alpha = 0.45$ still converges, and in fact faster than 0.05, while $\alpha = 0.55$ diverges. The limit is set by the steepest curvature of the loss surface: gradient descent converges only when $\alpha < 2 / \lambda_{\max}$, where $\lambda_{\max}$ is the largest eigenvalue of $\frac{2}{m}X^T X$ (about 4.05 here, so the limit is about 0.49). You do not need to compute this in practice, but it explains why a learning rate that is only slightly too large goes from "fast" to "broken". There is no skipping this step in practice; tuning $\alpha$ is part of the job.
 
 ### 6.8 Visualising Gradient Descent in 2D
 
@@ -561,11 +564,12 @@ plt.scatter([path[-1, 0]], [path[-1, 1]], color="black", s=120, marker="X",
 plt.xlabel("w0 (MedInc)")
 plt.ylabel("w1 (HouseAge)")
 plt.title("Gradient Descent Path on the Loss Surface")
+plt.gca().set_aspect("equal")   # equal axis scales, so right angles look like right angles
 plt.legend()
 plt.show()
 ```
 
-You should see the path step downhill, perpendicular to the contour lines at every point (because the gradient itself is always perpendicular to the contours). That is the geometric meaning of "steepest descent."
+You should see the path step downhill, perpendicular to the contour lines at every point (because the gradient itself is always perpendicular to the contours). The `set_aspect("equal")` line matters: if the two axes use different scales, the right angles are visually distorted and the path no longer looks perpendicular. That is the geometric meaning of "steepest descent."
 
 ## Daily Challenge
 
@@ -578,6 +582,8 @@ You should see the path step downhill, perpendicular to the contour lines at eve
 4. **Tuning the learning rate.** Run gradient descent on the California Housing data with at least 5 different learning rates spanning several orders of magnitude (e.g. 1e-5, 1e-3, 0.01, 0.1, 1.0, 10). For each, report the final loss and whether it converged. Plot all loss curves on a single figure with a log scale.
 
 5. **Bonus.** The gradient descent path in Section 6.8 should be perpendicular to the contour lines at every step. Explain in 2 to 3 sentences why this is the case, using the geometric meaning of the gradient from Section 4.2.
+
+> Submit your notebook to the Kanban board under your name by end of day.
 
 
 ## Summary

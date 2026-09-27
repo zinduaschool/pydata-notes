@@ -199,7 +199,7 @@ This rule is so useful that it is worth memorising. It lets you make rough proba
 - 95% of students scored between **50 and 90**
 - 99.7% of students scored between **40 and 100**
 
-A student scoring **95** is more than 2 standard deviations above the mean, placing them in roughly the top 2.5% of the class. That is a precise, quantifiable statement derived directly from the shape of the distribution.
+A student scoring **90** is exactly 2 standard deviations above the mean. Since 95% of scores fall within 2 standard deviations and the remaining 5% is split evenly between the two tails, only about 2.5% of students score above 90. A student scoring **95** (2.5 standard deviations above the mean) is rarer still, in roughly the top 0.6% of the class. That is a precise, quantifiable statement derived directly from the shape of the distribution.
 
 ### 5.5 Why the Normal Distribution Matters So Much
 

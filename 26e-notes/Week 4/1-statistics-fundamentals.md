@@ -37,7 +37,7 @@ Those three sentences are statistics in action. Today we make each one precise.
 
 ### A note on what comes next
 
-The descriptive tools in Sections 2 to 4 summarise the data you have in hand. The inferential tools previewed in Section 5 use that summary to make justified statements about a wider population you cannot fully observe. Distinguishing the two is one of the most important habits a data scientist develops, so we will be careful to point out which is which throughout the week.
+The descriptive tools in Sections 2 to 4 summarise the data you have in hand. The inferential tools previewed in Section 6 use that summary to make justified statements about a wider population you cannot fully observe. Distinguishing the two is one of the most important habits a data scientist develops, so we will be careful to point out which is which throughout the week.
 
 ## 2. Measures of Central Tendency
 
@@ -80,7 +80,7 @@ The mode is the **most frequently occurring value**. A dataset can have one mode
 | Skewed data or outliers present | Median | Robust to extreme values |
 | Categorical data, or finding the most common value | Mode | The only one that works for non-numeric categories |
 
-> **A useful habit.** Always compute all three when you can. If the mean and median are close, your data is roughly symmetric. If they diverge significantly, that is your first clue that the data is skewed. We will make "skewed" precise in Section 4.
+> **A useful habit.** Always compute all three when you can. If the mean and median are close, your data is roughly symmetric. If they diverge significantly, that is your first clue that the data is skewed. We will make "skewed" precise in Section 5.2.
 
 ## 3. Measures of Spread
 
@@ -252,7 +252,7 @@ Descriptive statistics can tell you that this sample's average score was 70. But
 
 ### 6.4 Preview: What Is Coming This Week
 
-Inferential statistics rests on two ideas you will build over the next few days:
+Inferential statistics rests on three ideas you will build over the next few days:
 
 - **Distributions** (Tuesday) provide the mathematical models that describe how values are likely to occur, which is what lets us make probability statements about samples in the first place.
 - **Probability** (Wednesday) gives the formal language for quantifying uncertainty and updating beliefs as new evidence arrives.
